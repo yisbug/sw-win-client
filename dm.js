@@ -44,17 +44,35 @@ class DM {
     }
   }
 
+  findPics(x1, y1, x2, y2, pic_name, delta_color, sim, dir) {
+    return dm.dll.FindPicExS(
+      Number(x1),
+      Number(y1),
+      Number(x2),
+      Number(y2),
+      pic_name,
+      delta_color,
+      Number(sim),
+      Number(dir)
+    );
+  }
+
   // 执行 dll 的方法
   dll(name, args = []) {
     try {
-      const fn = dm.dll[name];
-      let str = '';
-      if (args && args.length) {
-        str = `dm.dll.${name}("` + args.join('","') + `")`;
+      let result = '';
+      if (this[name]) {
+        result = this[name](...args);
       } else {
-        str = `dm.dll.${name}()`;
+        const fn = dm.dll[name];
+        let str = '';
+        if (args && args.length) {
+          str = `dm.dll.${name}("` + args.join('","') + `")`;
+        } else {
+          str = `dm.dll.${name}()`;
+        }
+        result = eval(str);
       }
-      const result = eval(str);
       return {
         dmid: this.dmid,
         retcode: 0,
