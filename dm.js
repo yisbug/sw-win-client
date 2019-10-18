@@ -16,7 +16,7 @@ class DM {
   }
 
   setBasePath(name) {
-    const dir = this.getDir(name);
+    const dir = path.join(__dirname, dir);
     const result = dm.dll.SetPath(dir);
     return {
       dmid: this.dmid,
