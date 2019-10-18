@@ -26,11 +26,9 @@ server.get('/api/dm/:dmid/:type/:name', async (req, res) => {
   // 请求参数
   const args = Object.keys(req.query)
     .sort()
-    .map(id => {
-      return req.query[id];
-    });
+    .map(id => req.query[id]);
 
-  console.log('request', type, name, args);
+  console.log('request', type, name, (args || []).join(','));
   try {
     const result = dm[type](name, args);
     res.send(200, result);

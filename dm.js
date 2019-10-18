@@ -15,6 +15,16 @@ class DM {
     };
   }
 
+  setBasePath(name) {
+    const dir = this.getDir(name);
+    const result = dm.dll.SetPath(dir);
+    return {
+      dmid: this.dmid,
+      retcode: 0,
+      result: result,
+    };
+  }
+
   // 执行 js 封装的方法
   exec(name, args = []) {
     try {
@@ -54,7 +64,8 @@ class DM {
       return {
         dmid: this.dmid,
         retcode: -1,
-        error: e,
+        error: e.message,
+        stack: e.stack,
       };
     }
   }
