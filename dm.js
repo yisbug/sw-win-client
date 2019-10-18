@@ -36,13 +36,22 @@ class DM {
   // 执行 dll 的方法
   dll(name, args = []) {
     try {
-      const result = db.dll[name].apply(db.dll, args);
+      console.log(name);
+      const fn = dm.dll[name];
+      let str = '';
+      if(args && args.length){
+         str = `dm.dll.${name}("`+args.join('","')+`")`
+      }else{
+        str = `dm.dll.${name}()`;
+      }
+      const result = eval(str);
       return {
         dmid: this.dmid,
         retcode: 0,
         result: result
       };
     } catch (e) {
+      console.log(e);
       return {
         dmid: this.dmid,
         retcode: -1,
