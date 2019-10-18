@@ -45,7 +45,8 @@ class DM {
   }
 
   findPics(x1, y1, x2, y2, pic_name, delta_color, sim, dir) {
-    return dm.dll.FindPicExS(
+    console.log(x1, y1, x2, y2, pic_name, delta_color, sim, dir);
+    console.log(
       Number(x1),
       Number(y1),
       Number(x2),
@@ -55,6 +56,18 @@ class DM {
       Number(sim),
       Number(dir)
     );
+    const res = dm.dll.FindPicExS(
+      Number(x1),
+      Number(y1),
+      Number(x2),
+      Number(y2),
+      pic_name,
+      delta_color,
+      Number(sim),
+      Number(dir)
+    );
+    console.log('res', res);
+    return res;
   }
 
   // 执行 dll 的方法
