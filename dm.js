@@ -16,7 +16,7 @@ class DM {
   }
 
   setBasePath(name) {
-    const dir = path.join(__dirname, dir);
+    const dir = path.join(__dirname, name);
     const result = dm.dll.SetPath(dir);
     return {
       dmid: this.dmid,
@@ -38,7 +38,8 @@ class DM {
       return {
         dmid: this.dmid,
         retcode: -1,
-        error: e,
+        error: e.essage,
+        stack: e.stack,
       };
     }
   }

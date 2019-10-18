@@ -33,6 +33,11 @@ server.get('/api/dm/:dmid/:type/:name', async (req, res) => {
     const result = dm[type](name, args);
     res.send(200, result);
   } catch (e) {
-    res.send(400, e.message);
+    res.send(200, {
+      dmid: dm.dmid,
+      retcode: -1,
+      error: e.message,
+      stack: e.stack,
+    });
   }
 });
