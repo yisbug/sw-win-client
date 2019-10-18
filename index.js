@@ -29,6 +29,8 @@ server.get('/api/dm/:dmid/:type/:name', async (req, res) => {
     .map(id => {
       return req.query[id];
     });
+
+  console.log('request', type, name, args);
   try {
     const result = dm[type](name, args);
     res.send(200, result);

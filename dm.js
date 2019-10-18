@@ -11,7 +11,7 @@ class DM {
     return {
       dmid: this.dmid,
       retcode: 0,
-      result: path.join(__dirname, dir)
+      result: path.join(__dirname, dir),
     };
   }
 
@@ -22,13 +22,13 @@ class DM {
       return {
         dmid: this.dmid,
         retcode: 0,
-        result: result
+        result: result,
       };
     } catch (e) {
       return {
         dmid: this.dmid,
         retcode: -1,
-        error: e
+        error: e,
       };
     }
   }
@@ -36,26 +36,25 @@ class DM {
   // 执行 dll 的方法
   dll(name, args = []) {
     try {
-      console.log(name);
       const fn = dm.dll[name];
       let str = '';
-      if(args && args.length){
-         str = `dm.dll.${name}("`+args.join('","')+`")`
-      }else{
+      if (args && args.length) {
+        str = `dm.dll.${name}("` + args.join('","') + `")`;
+      } else {
         str = `dm.dll.${name}()`;
       }
       const result = eval(str);
       return {
         dmid: this.dmid,
         retcode: 0,
-        result: result
+        result: result,
       };
     } catch (e) {
       console.log(e);
       return {
         dmid: this.dmid,
         retcode: -1,
-        error: e
+        error: e,
       };
     }
   }
